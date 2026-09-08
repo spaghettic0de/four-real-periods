@@ -1,0 +1,30 @@
+name: Verify
+on: [push, pull_request]
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+      - run: echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - run: lake exe cache get Mathlib.Data.Real.Basic Mathlib.Algebra.Order.Floor.Ring Mathlib.Tactic.Linarith Mathlib.Tactic.NormNum Mathlib.Tactic.Ring.Basic Mathlib.Tactic.FinCases Mathlib.Data.Fintype.Basic Mathlib.Algebra.Order.Archimedean.Real.Basic
+      - run: python3 experiments/verify.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: proof-verification
+          path: results/standalone-verification.json
+  visual:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - run: npm run build

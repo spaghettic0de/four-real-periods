@@ -1,0 +1,174 @@
+{
+  "verified": true,
+  "theorem": "CertifiedDiscovery.Pinwheel.four_periods_schedulable",
+  "statement": "Four positive real periods in nondecreasing order, density at most 5/6, admit a schedule satisfying all original ceil(ell*a) window requirements.",
+  "multiplicity_corollary_formalized": false,
+  "lean_version": "Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "builds": [
+    {
+      "module": "PinwheelWords",
+      "sha256": "3a752c8f8ebcd58e9a6104054d85dd89c35b83bcc6092d877997ebcacc600f8c",
+      "exit_code": 0,
+      "stdout": "'CertifiedDiscovery.Pinwheel.word0_checked' depends on axioms: [propext]\n'CertifiedDiscovery.Pinwheel.word46_checked' depends on axioms: [propext]\n",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelCover",
+      "sha256": "a76d550548e95dbde61d3aa5d37a7b00b3c76c22d87cd688f9d6c6828f4eb463",
+      "exit_code": 0,
+      "stdout": "<research-workspace>/CertifiedDiscovery/PinwheelCover.lean:63:5: warning: Variable name `h2` is not explicitly referenced.\n\nHint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:\n  [apply] _h2\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\n'CertifiedDiscovery.Pinwheel.four_rate_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelPeriodic",
+      "sha256": "ef16046cde7aedd73e93c466d466d0ad33fe38d0f93496fb1e178175ba75842d",
+      "exit_code": 0,
+      "stdout": "'CertifiedDiscovery.Pinwheel.periodic_window_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'CertifiedDiscovery.Pinwheel.periodicPrefix_shift' depends on axioms: [propext]\n",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelTable",
+      "sha256": "ac2aedad1df7812da14d176724c5b0c1f92f3ee3838ed0788746096490bdf9f7",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelTables",
+      "sha256": "66c2c0ef5163299465d964fc8c99b93ef12046939ba6d3df9e56ce7fce353fa7",
+      "exit_code": 0,
+      "stdout": "'CertifiedDiscovery.Pinwheel.periodic_box_valid' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelBalanced",
+      "sha256": "bfe9f60929fc870e0e0c9aab73ac6cf29a674ea36c6f945ee30f1d827607251f",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelGroups",
+      "sha256": "78680de7900e8df8820aa6508f54b6c89f26e09782e33af8ccdb287d0871a19f",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelFour",
+      "sha256": "d809e6e5197c577ee8a11f1497ded14fca52e442bc4876915d5ebcfe22b39671",
+      "exit_code": 0,
+      "stdout": "<research-workspace>/CertifiedDiscovery/PinwheelFour.lean:36:31: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\n'CertifiedDiscovery.Pinwheel.four_rates' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelSchedule",
+      "sha256": "4959320dbbfde82fdcb581644e6c837d3cca1c400f7167b1769f80931118a3f0",
+      "exit_code": 0,
+      "stdout": "'CertifiedDiscovery.Pinwheel.four_rates_schedulable' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelPeriods",
+      "sha256": "4455ea57733071cb19514696782946a73421e24c658c0ab20448c7db29fc7eab",
+      "exit_code": 0,
+      "stdout": "'CertifiedDiscovery.Pinwheel.four_periods_schedulable' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "stderr": ""
+    }
+  ],
+  "module_replays": [
+    {
+      "module": "PinwheelWords",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelCover",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelPeriodic",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelTable",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelTables",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelBalanced",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelGroups",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelFour",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelSchedule",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "module": "PinwheelPeriods",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "kernel_recheck": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "kernel_recheck_mode": "--fresh (entire imported closure)",
+  "certificate_negative_controls": [
+    {
+      "file": "RejectClosedCap.lean",
+      "exit_code": 1,
+      "stdout": "<research-workspace>/tests/RejectClosedCap.lean:14:42: error: Tactic `decide` proved that the proposition\n  closedCapTable0.Certified\nis false\n",
+      "stderr": ""
+    },
+    {
+      "file": "RejectMean.lean",
+      "exit_code": 1,
+      "stdout": "<research-workspace>/tests/RejectMean.lean:14:40: error: Tactic `decide` proved that the proposition\n  highCapTable0.Certified\nis false\n",
+      "stderr": ""
+    },
+    {
+      "file": "RejectPrefix.lean",
+      "exit_code": 1,
+      "stdout": "<research-workspace>/tests/RejectPrefix.lean:14:36: error: Tactic `decide` proved that the proposition\n  badTable0.Certified\nis false\n",
+      "stderr": ""
+    }
+  ],
+  "negative_control": {
+    "exit_code": 1,
+    "stdout": "/var/folders/gs/54jzj38d6kx3gb4s8tg7rdxc0000gn/T/pinwheel-negative-arw2s_6x/Negative.lean:3:76: error: Tactic `decide` proved that the proposition\n  wordChecked (List.replicate 12 0) caps0 = true\nis false\n",
+    "stderr": ""
+  },
+  "seconds": 280.11408233299153
+}

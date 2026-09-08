@@ -1,0 +1,12 @@
+used Codex to look for a counterexample to a scheduling conjecture.
+
+we got a proof of the four-task real-period case instead: 47 repeating schedules + 3 balanced constructions.
+
+Lean checks every time window, forever. Fable 5.1 reviewed the proof.
+
+paper + code ↓
+
+--- reply ---
+https://github.com/spaghettic0de/four-real-periods
+
+This extends the published three-value result. The general real-period conjecture remains open. The repo has the exact theorem, paper, and reproducible kernel checks.

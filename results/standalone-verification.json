@@ -1,0 +1,184 @@
+{
+  "verified": true,
+  "build": {
+    "command": [
+      "lake",
+      "build"
+    ],
+    "exit_code": 0,
+    "stdout": "\u2139 [949/958] Built CertifiedDiscovery.PinwheelPeriodic (2.4s)\ninfo: CertifiedDiscovery/PinwheelPeriodic.lean:84:0: 'CertifiedDiscovery.Pinwheel.periodic_window_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\ninfo: CertifiedDiscovery/PinwheelPeriodic.lean:85:0: 'CertifiedDiscovery.Pinwheel.periodicPrefix_shift' depends on axioms: [propext]\n\u26a0 [950/958] Built CertifiedDiscovery.PinwheelCover (21s)\nwarning: CertifiedDiscovery/PinwheelCover.lean:63:5: Variable name `h2` is not explicitly referenced.\n\nHint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:\n  [apply] _h2\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`\ninfo: CertifiedDiscovery/PinwheelCover.lean:1580:0: 'CertifiedDiscovery.Pinwheel.four_rate_cover' depends on axioms: [propext, Classical.choice, Quot.sound]\n\u2139 [951/958] Built CertifiedDiscovery.PinwheelWords (26s)\ninfo: CertifiedDiscovery/PinwheelWords.lean:217:0: 'CertifiedDiscovery.Pinwheel.word0_checked' depends on axioms: [propext]\ninfo: CertifiedDiscovery/PinwheelWords.lean:218:0: 'CertifiedDiscovery.Pinwheel.word46_checked' depends on axioms: [propext]\n\u2714 [952/958] Built CertifiedDiscovery.PinwheelTable (1.7s)\n\u2714 [953/958] Built CertifiedDiscovery.PinwheelBalanced (1.7s)\n\u2139 [954/958] Built CertifiedDiscovery.PinwheelTables (37s)\ninfo: CertifiedDiscovery/PinwheelTables.lean:1239:0: 'CertifiedDiscovery.Pinwheel.periodic_box_valid' depends on axioms: [propext, Classical.choice, Quot.sound]\n\u2714 [955/958] Built CertifiedDiscovery.PinwheelGroups (1.9s)\n\u26a0 [956/958] Built CertifiedDiscovery.PinwheelFour (1.7s)\nwarning: CertifiedDiscovery/PinwheelFour.lean:36:31: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice\n\nNote: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`\ninfo: CertifiedDiscovery/PinwheelFour.lean:38:0: 'CertifiedDiscovery.Pinwheel.four_rates' depends on axioms: [propext, Classical.choice, Quot.sound]\n\u2139 [957/958] Built CertifiedDiscovery.PinwheelSchedule (2.3s)\ninfo: CertifiedDiscovery/PinwheelSchedule.lean:63:0: 'CertifiedDiscovery.Pinwheel.four_rates_schedulable' depends on axioms: [propext, Classical.choice, Quot.sound]\n\u2139 [958/958] Built CertifiedDiscovery.PinwheelPeriods (1.6s)\ninfo: CertifiedDiscovery/PinwheelPeriods.lean:25:0: 'CertifiedDiscovery.Pinwheel.four_periods_schedulable' depends on axioms: [propext, Classical.choice, Quot.sound]\nBuild completed successfully (958 jobs).\n",
+    "stderr": ""
+  },
+  "module_replays": [
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelWords"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelCover"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelPeriodic"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelTable"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelTables"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelBalanced"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelGroups"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelFour"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelSchedule"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "leanchecker",
+        "CertifiedDiscovery.PinwheelPeriods"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "fresh_replay": {
+    "command": [
+      "lake",
+      "env",
+      "leanchecker",
+      "--fresh",
+      "CertifiedDiscovery.PinwheelPeriods"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "negative_controls": [
+    {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "tests/RejectClosedCap.lean"
+      ],
+      "exit_code": 1,
+      "stdout": "tests/RejectClosedCap.lean:14:42: error: Tactic `decide` proved that the proposition\n  closedCapTable0.Certified\nis false\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "tests/RejectMean.lean"
+      ],
+      "exit_code": 1,
+      "stdout": "tests/RejectMean.lean:14:40: error: Tactic `decide` proved that the proposition\n  highCapTable0.Certified\nis false\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "tests/RejectPrefix.lean"
+      ],
+      "exit_code": 1,
+      "stdout": "tests/RejectPrefix.lean:14:36: error: Tactic `decide` proved that the proposition\n  badTable0.Certified\nis false\n",
+      "stderr": ""
+    }
+  ],
+  "seconds": 304.76348345899896,
+  "source_sha256": {
+    "PinwheelFour.lean": "d809e6e5197c577ee8a11f1497ded14fca52e442bc4876915d5ebcfe22b39671",
+    "PinwheelWords.lean": "3a752c8f8ebcd58e9a6104054d85dd89c35b83bcc6092d877997ebcacc600f8c",
+    "PinwheelSchedule.lean": "4959320dbbfde82fdcb581644e6c837d3cca1c400f7167b1769f80931118a3f0",
+    "PinwheelBalanced.lean": "bfe9f60929fc870e0e0c9aab73ac6cf29a674ea36c6f945ee30f1d827607251f",
+    "PinwheelCover.lean": "a76d550548e95dbde61d3aa5d37a7b00b3c76c22d87cd688f9d6c6828f4eb463",
+    "PinwheelGroups.lean": "78680de7900e8df8820aa6508f54b6c89f26e09782e33af8ccdb287d0871a19f",
+    "PinwheelPeriods.lean": "4455ea57733071cb19514696782946a73421e24c658c0ab20448c7db29fc7eab",
+    "PinwheelTable.lean": "ac2aedad1df7812da14d176724c5b0c1f92f3ee3838ed0788746096490bdf9f7",
+    "PinwheelTables.lean": "66c2c0ef5163299465d964fc8c99b93ef12046939ba6d3df9e56ce7fce353fa7",
+    "PinwheelPeriodic.lean": "ef16046cde7aedd73e93c466d466d0ad33fe38d0f93496fb1e178175ba75842d"
+  }
+}

@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,hyperref,xcolor}
+\hypersetup{pdfauthor={spaghetti},pdftitle={Pinwheel Scheduling with Four Real Periods},colorlinks=true,urlcolor=teal,citecolor=teal,linkcolor=teal}
+\newtheorem{theorem}{Theorem}\newtheorem{lemma}[theorem]{Lemma}\newtheorem{corollary}[theorem]{Corollary}
+\title{Pinwheel Scheduling with Four Real Periods}
+\author{\href{https://x.com/spaghetti_codes}{spaghetti}\thanks{The proof, formalization, and manuscript were developed using AI systems under the author's direction. Verification scope and AI use are described in Section~\ref{sec:verification} and Appendix~\ref{app:ai}.}}
+\date{September 2026 --- Draft}
+\begin{document}\maketitle
+\begin{abstract}
+We prove that every pinwheel scheduling instance whose periods take at most four distinct positive real values and whose density is at most $5/6$ admits a valid schedule. Here a task with period $a$ must occur at least $\ell$ times in every window of $\lceil\ell a\rceil$ consecutive slots, for every positive integer $\ell$. The proof reduces to four tasks and covers their continuous rate domain by three balanced constructions and 47 periodic schedules of lengths 12 and 18. An exact finite certificate establishes coverage, including the strict boundaries of the periodic regions. Mean-rate bounds and finite remainder-window inequalities extend each periodic certificate to all integer starting times and all window lengths.
+\end{abstract}
+
+\section*{Introduction}
+Pinwheel scheduling asks how to serve recurring tasks on a single machine without allowing any task to wait too long. For integer periods, task $i$ must be performed at least once in every $a_i$ consecutive slots. The sum of reciprocal periods measures the required load, but a load below one does not by itself guarantee a schedule.
+
+Kawamura proved that density at most $5/6$ is sufficient for arbitrary integer-period instances, settling the conjecture of Chan and Chin \cite{kawamura}. His proof introduced a real-period formulation in which every task must satisfy a family of frequency requirements at all scales. For example, a period of $7/2$ requires an execution in every four slots and two executions in every seven slots. Replacing the real period by its ceiling would lose the second requirement.
+
+Fujiwara, Miyagi and Ouchi proved the $5/6$ bound for instances with three distinct real period values and conjectured that it holds for arbitrary real periods \cite{fmo}. Their argument combines balanced schedules with periodic schedules that remain valid over regions of the parameter space. They identified four or five distinct values as possible extensions of this approach.
+
+We prove the four-value case. After a splitting reduction, the essential problem is to schedule four tasks whose rates sum to $5/6$. Three balanced constructions handle part of this three-dimensional domain. We cover the remainder with 47 periodic schedules, certified by a finite tree of exact linear inequalities. The open and closed endpoints of the regions are part of the certificate. This gives a computer-assisted proof over the entire real domain, rather than a test of finitely many instances.
+
+\section{Main theorem and notation}
+Let $A=(a_i)_{i=1}^n$ be a nonempty finite instance with positive real periods. Its density is
+\[
+D(A)=\sum_{i=1}^n\frac1{a_i}.
+\]
+A schedule is a function $S:\mathbb Z\to\{1,\ldots,n\}$. It is valid for $A$ if, for every task $i$, every $m\in\mathbb Z$, and every integer $\ell>0$,
+\[
+\#\{t\in[m,m+\lceil\ell a_i\rceil)\cap\mathbb Z:S(t)=i\}\geq\ell.
+\]
+\begin{theorem}\label{thm:main}
+If the periods of $A$ take at most four distinct values and $D(A)\leq5/6$, then $A$ admits a valid schedule.
+\end{theorem}
+
+We first prove the four-task case, indexing its tasks by $0,1,2,3$. Theorem~\ref{thm:main} then follows by the standard splitting property and the established smaller cases. Throughout the four-task argument, labels may be permuted so that the rates $r_i=1/a_i$ satisfy $r_0\geq r_1\geq r_2\geq r_3>0$.
+
+\section{Rates and balanced constructions}
+It suffices to construct cumulative integer counts $F_i:\mathbb Z\to\mathbb Z$ with nonnegative increments summing to one and satisfying
+\begin{equation}\label{eq:bound}
+Lr_i<F_i(m+L)-F_i(m)+1\qquad(m\in\mathbb Z,\ L\in\mathbb Z_{\geq0}).
+\end{equation}
+The increments specify exactly one task per slot. Taking $L=\lceil\ell/r_i\rceil$ in \eqref{eq:bound} proves the required count using integrality. We may assume $r_0\geq r_1\geq r_2\geq r_3>0$ and total rate $5/6$: raise only $r_0$ to fill any slack, construct the stronger schedule, then weaken.
+
+For $u\in[0,1]$, the cumulative counts $F(t)=\lfloor tu\rfloor$ and $G(t)=t-F(t)$ give a balanced binary schedule. Each satisfies \eqref{eq:bound} at rates $u$ and $1-u$. Splitting a cumulative count $F$ cyclically among $q$ tasks uses the counts
+\[
+F_j(t)=\left\lfloor\frac{F(t)+j}{q}\right\rfloor,\qquad j=0,\ldots,q-1.
+\]
+Their sum is $F(t)$ and each inherits the bound at any rate $r$ with $qr\leq u$. For each window, the aggregate count is at least $\lfloor Lu\rfloor$. Cyclic assignment gives each label at least $\lfloor\lfloor Lu\rfloor/q\rfloor=\lfloor Lu/q\rfloor$ occurrences, which proves the split bound.
+
+For $k\in\{1,2,3\}$, we obtain sufficient regions
+\begin{equation}\label{eq:analytic}
+kr_0+(4-k)r_k\leq1.
+\end{equation}
+Set $u=kr_0$, allocate the first group using $F$, the remaining group using $G$, and split both cyclically. The order of the rates ensures every individual requirement is met.
+
+\section{Periodic certificates}
+Let a cyclic word have length $P$ and $c_i$ occurrences of label $i$. Associate to each label a rational upper cap $b_i$ and an open or closed endpoint. For every cyclic phase $m$ and $0\leq L<P$, write $N_i(m,L)$ for its count. We require
+\[
+Pb_i\leq c_i,\qquad
+\begin{cases}
+Lb_i<N_i(m,L)+1&\text{for a closed cap},\\
+Lb_i\leq N_i(m,L)+1&\text{for an open cap}.
+\end{cases}
+\]
+If $r_i\leq b_i$ in the closed case or $r_i<b_i$ in the open case, then $Lr_i<N_i(m,L)+1$. The $L=0$ case is immediate; for $L>0$, openness supplies the needed strict inequality.
+
+For arbitrary $H=qP+L$, $0\leq L<P$, periodicity gives count $qc_i+N_i(m,L)$. Since
+\[
+Hr_i\leq qc_i+Lr_i<qc_i+N_i(m,L)+1,
+\]
+the bound holds at every length. Euclidean division also reduces negative starting times to the finite phase set. The cumulative counts are extended periodically with increment $c_i$ per period. Their one-slot increments are the indicators of the labels in the word, including across the period boundary.
+
+For example, one 12-slot word is
+\[
+\texttt{ACBADABACBAB}.
+\]
+Its rate bounds are $r_0\leq5/12$, $r_1<1/3$, $r_2<1/6$, $r_3\leq1/12$. These endpoint conventions are essential. Appendix~\ref{app:words} lists all 47 words and their bounds.
+
+\section{Continuous coverage}
+\begin{lemma}\label{lem:cover}
+Every ordered positive four-rate vector with sum $5/6$ lies in one of the three regions \eqref{eq:analytic} or one of the 47 certified periodic regions.
+\end{lemma}
+The proof is a finite decision tree with 136 splits, 136 periodic-region leaves, and one empty leaf. Each split is a real linear inequality and its exact complement. At each periodic leaf, rational nonnegative linear combinations imply the four required rate bounds. At the empty leaf, such a combination gives a contradiction. Strict inequalities propagate whenever a strict premise has positive coefficient.
+
+The accompanying repository contains the complete decision tree and its rational multipliers. An exact arithmetic checker verifies every linear combination and every branch of the tree. A separate Lean proof establishes the same cover by explicit case splits and linear arithmetic. Neither check relies on a numerical tolerance or a sampled point cloud.
+
+\begin{proof}[Proof of the four-task case]
+Permute the task labels to order their rates. If the density is below $5/6$, increase the largest rate to fill the slack. Lemma~\ref{lem:cover} selects either a balanced construction or a periodic certificate. In both cases the cumulative counts satisfy \eqref{eq:bound}, which implies the required frequency windows. Weakening the enlarged rate and undoing the label permutation gives a schedule for the original instance.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose first that $A$ contains at least four tasks. Partition them into exactly four nonempty groups, each containing only tasks with the same period. A group of $g$ tasks with period $a$ is represented by one task of period $a/g$. Density is unchanged. Apply the four-task case to these four aggregate tasks.
+
+Assign each group's successive occurrences cyclically among its $g$ original labels, fixing an arbitrary origin for this assignment on the two-sided schedule. Every window of $\lceil\ell a\rceil=\lceil(g\ell)(a/g)\rceil$ contains at least $g\ell$ aggregate occurrences. These form a consecutive block in the cyclic assignment, so the window contains at least $\ell$ occurrences of each original label. This is the splitting property of \cite{kawamura}.
+
+For one or two tasks, use the published two-value theorem. For three tasks, use that theorem if the periods repeat and the published three-value theorem otherwise \cite{fmo}.
+\end{proof}
+
+\section{Formal verification}\label{sec:verification}
+The accompanying Lean development proves the four-task result from the original frequency-window definition. Its entry point is
+\[
+\texttt{CertifiedDiscovery.Pinwheel.}\quad
+\texttt{four\_periods\_schedulable}.
+\]
+The formal statement assumes $0<a_0\leq a_1\leq a_2\leq a_3$ and reciprocal sum at most $5/6$, and produces a function from the integers to four task labels. It quantifies over every integer starting time and every positive integer repetition count. Sorting and relabeling arbitrary inputs, and the splitting reduction in the proof of Theorem~\ref{thm:main}, are mathematical arguments in this paper and are not part of the present formalization.
+
+The development follows the balanced constructions, periodic remainder argument, continuous cover, and density weakening given above. Its finite predicate checks cumulative increments, the period boundary, mean-rate inequalities, and all remainder windows. The 47 tables satisfy this predicate by kernel evaluation. The coverage argument is proved over the real numbers by exhaustive case splits and linear arithmetic.
+
+Lean 4.33.1 and Mathlib commit \texttt{0df444a360eaa60ab8c11dca51a86af692955474} are pinned. The recorded audit rebuilds the project, replays each module, and replays the full imported closure in a fresh kernel environment. The theorem depends only on the standard axioms \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}, with no unproved project axioms or proof holes. Deliberately corrupted prefix counts, endpoint flags, and mean-rate bounds are rejected by the certificate predicate.
+
+Kernel checking establishes the formal statements and proofs. Correspondence with the scheduling definition and the mathematical reductions outside the formalization was reviewed separately. The proof, exact certificates, and reproducible checks are available in the \href{https://github.com/spaghettic0de/four-real-periods}{accompanying repository}.
+
+\appendix
+\section{Periodic schedules}\label{app:words}
+The letters $A,B,C,D$ denote tasks $0,1,2,3$. Each word is repeated in both time directions. The four rate conditions in the table are simultaneous upper bounds. An inequality shown as strict must remain strict. Each entry satisfies the finite conditions of Section~3; the complete coverage certificate is provided in the repository.
+
+\begingroup\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{rlllll}
+\toprule
+No. & Word & $r_0$ & $r_1$ & $r_2$ & $r_3$\\\midrule
+\endfirsthead
+\toprule
+No. & Word & $r_0$ & $r_1$ & $r_2$ & $r_3$\\\midrule
+\endhead
+1 & \texttt{ACBADABACBAB} & $\leq \frac{5}{12}$ & $< \frac{1}{3}$ & $< \frac{1}{6}$ & $\leq \frac{1}{12}$ \\
+2 & \texttt{ADABACDABABC} & $\leq \frac{5}{12}$ & $< \frac{2}{9}$ & $\leq \frac{1}{6}$ & $< \frac{1}{6}$ \\
+3 & \texttt{BDCABCABABCA} & $< \frac{1}{3}$ & $< \frac{1}{3}$ & $< \frac{1}{4}$ & $\leq \frac{1}{12}$ \\
+4 & \texttt{ACDABCDABACB} & $< \frac{1}{3}$ & $< \frac{1}{4}$ & $< \frac{1}{4}$ & $< \frac{1}{7}$ \\
+5 & \texttt{CADAABAACABA} & $< \frac{4}{7}$ & $< \frac{1}{6}$ & $< \frac{1}{7}$ & $\leq \frac{1}{12}$ \\
+6 & \texttt{ABAAADAABAACAABAAA} & $< \frac{7}{10}$ & $< \frac{1}{6}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+7 & \texttt{AABACDABAACABCAABC} & $< \frac{1}{2}$ & $< \frac{2}{9}$ & $< \frac{1}{5}$ & $\leq \frac{1}{18}$ \\
+8 & \texttt{ABCADBACABABCABCAB} & $< \frac{5}{13}$ & $< \frac{2}{7}$ & $< \frac{3}{14}$ & $\leq \frac{1}{18}$ \\
+9 & \texttt{ABAAADAAABAAACAAAA} & $< \frac{10}{13}$ & $< \frac{1}{9}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+10 & \texttt{ABCABABAABACBADABA} & $< \frac{1}{2}$ & $< \frac{1}{3}$ & $\leq \frac{1}{9}$ & $\leq \frac{1}{18}$ \\
+11 & \texttt{ABACAABACADABACABA} & $< \frac{6}{11}$ & $< \frac{1}{5}$ & $< \frac{1}{6}$ & $\leq \frac{1}{18}$ \\
+12 & \texttt{ABACBACADBAC} & $\leq \frac{5}{12}$ & $< \frac{1}{4}$ & $< \frac{1}{4}$ & $\leq \frac{1}{12}$ \\
+13 & \texttt{ACABAADABAAB} & $\leq \frac{7}{12}$ & $< \frac{1}{4}$ & $\leq \frac{1}{12}$ & $\leq \frac{1}{12}$ \\
+14 & \texttt{ABABABCABADABCAABC} & $< \frac{7}{16}$ & $< \frac{2}{7}$ & $< \frac{2}{13}$ & $\leq \frac{1}{18}$ \\
+15 & \texttt{ADAABACAACABAAABAC} & $< \frac{3}{5}$ & $< \frac{2}{13}$ & $< \frac{1}{7}$ & $\leq \frac{1}{18}$ \\
+16 & \texttt{ABAACABABADABACABA} & $< \frac{7}{13}$ & $< \frac{1}{4}$ & $< \frac{1}{9}$ & $\leq \frac{1}{18}$ \\
+17 & \texttt{ABACABABAABADABABA} & $\leq \frac{5}{9}$ & $< \frac{1}{3}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+18 & \texttt{ABCABADACBACABABAD} & $< \frac{4}{9}$ & $< \frac{1}{4}$ & $< \frac{1}{8}$ & $< \frac{1}{10}$ \\
+19 & \texttt{ABADCABABCADBACACB} & $\leq \frac{7}{18}$ & $< \frac{1}{4}$ & $< \frac{1}{5}$ & $< \frac{1}{9}$ \\
+20 & \texttt{ADAABAACAAABAACABA} & $< \frac{2}{3}$ & $< \frac{1}{6}$ & $< \frac{1}{10}$ & $\leq \frac{1}{18}$ \\
+21 & \texttt{ACABADCABAAB} & $< \frac{1}{2}$ & $< \frac{1}{4}$ & $< \frac{1}{6}$ & $\leq \frac{1}{12}$ \\
+22 & \texttt{ABACABADBAACBABABC} & $< \frac{3}{7}$ & $< \frac{3}{10}$ & $< \frac{1}{7}$ & $\leq \frac{1}{18}$ \\
+23 & \texttt{ABABAABAADABAABACA} & $\leq \frac{11}{18}$ & $< \frac{1}{4}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+24 & \texttt{AABACABAACABCADABC} & $< \frac{3}{7}$ & $< \frac{2}{9}$ & $< \frac{3}{14}$ & $\leq \frac{1}{18}$ \\
+25 & \texttt{ABAACBADABCABACBAC} & $< \frac{5}{12}$ & $< \frac{3}{11}$ & $< \frac{1}{5}$ & $\leq \frac{1}{18}$ \\
+26 & \texttt{ABAADBAACBAABADABC} & $< \frac{1}{2}$ & $\leq \frac{5}{18}$ & $\leq \frac{1}{9}$ & $< \frac{1}{9}$ \\
+27 & \texttt{ABAABAACABADABADAC} & $< \frac{7}{13}$ & $< \frac{1}{5}$ & $< \frac{1}{9}$ & $< \frac{1}{13}$ \\
+28 & \texttt{ABABCADBACBAACBABC} & $< \frac{3}{8}$ & $< \frac{3}{10}$ & $< \frac{2}{9}$ & $\leq \frac{1}{18}$ \\
+29 & \texttt{ACABAAABADAABAAABA} & $< \frac{2}{3}$ & $\leq \frac{2}{9}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+30 & \texttt{ADBACABACABABCABAB} & $< \frac{4}{9}$ & $< \frac{2}{7}$ & $< \frac{1}{8}$ & $\leq \frac{1}{18}$ \\
+31 & \texttt{AACAAABAABAAADAABA} & $\leq \frac{13}{18}$ & $< \frac{1}{7}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+32 & \texttt{ADAABACAABABAACAAB} & $\leq \frac{11}{18}$ & $< \frac{1}{5}$ & $< \frac{1}{9}$ & $\leq \frac{1}{18}$ \\
+33 & \texttt{ACABACABAACABADABA} & $\leq \frac{5}{9}$ & $\leq \frac{2}{9}$ & $< \frac{1}{8}$ & $\leq \frac{1}{18}$ \\
+34 & \texttt{ACABACBACABDACBAAB} & $< \frac{2}{5}$ & $\leq \frac{5}{18}$ & $< \frac{1}{5}$ & $\leq \frac{1}{18}$ \\
+35 & \texttt{ABAACABADABACABACA} & $< \frac{7}{13}$ & $< \frac{2}{9}$ & $< \frac{1}{7}$ & $\leq \frac{1}{18}$ \\
+36 & \texttt{ABABADBACABABCAABC} & $< \frac{7}{16}$ & $< \frac{1}{3}$ & $< \frac{1}{8}$ & $\leq \frac{1}{18}$ \\
+37 & \texttt{ACABAABAAABADABAAB} & $< \frac{7}{12}$ & $\leq \frac{5}{18}$ & $\leq \frac{1}{18}$ & $\leq \frac{1}{18}$ \\
+38 & \texttt{ABABACABADCABACABC} & $< \frac{4}{9}$ & $< \frac{1}{4}$ & $< \frac{1}{5}$ & $\leq \frac{1}{18}$ \\
+39 & \texttt{ABADBACAABADCABAAC} & $< \frac{1}{2}$ & $< \frac{3}{14}$ & $< \frac{1}{6}$ & $< \frac{1}{9}$ \\
+40 & \texttt{ABCABACABCABDACBAC} & $< \frac{3}{8}$ & $\leq \frac{5}{18}$ & $< \frac{1}{4}$ & $\leq \frac{1}{18}$ \\
+41 & \texttt{ACABAABACABADABAAB} & $< \frac{5}{9}$ & $\leq \frac{5}{18}$ & $< \frac{1}{10}$ & $\leq \frac{1}{18}$ \\
+42 & \texttt{ABCABAACBAABACABAD} & $< \frac{1}{2}$ & $\leq \frac{5}{18}$ & $< \frac{1}{6}$ & $\leq \frac{1}{18}$ \\
+43 & \texttt{ABABADACABAADAABAC} & $< \frac{7}{13}$ & $< \frac{2}{11}$ & $< \frac{1}{9}$ & $< \frac{1}{10}$ \\
+44 & \texttt{AABACBACAABACDABAC} & $< \frac{1}{2}$ & $< \frac{3}{14}$ & $< \frac{3}{14}$ & $\leq \frac{1}{18}$ \\
+45 & \texttt{ABCABACBACBABACBAD} & $\leq \frac{7}{18}$ & $< \frac{1}{3}$ & $< \frac{1}{5}$ & $\leq \frac{1}{18}$ \\
+46 & \texttt{ABCADBACBAACBACABD} & $< \frac{4}{11}$ & $\leq \frac{5}{18}$ & $< \frac{1}{5}$ & $< \frac{1}{12}$ \\
+47 & \texttt{ABADCABACBAD} & $\leq \frac{5}{12}$ & $< \frac{1}{4}$ & $< \frac{1}{7}$ & $< \frac{1}{7}$ \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\section{AI usage}\label{app:ai}
+Codex performed the exploratory search, proof development, formalization, and manuscript drafting, with the author selecting the problem and directing the investigation.
+
+The initial search sought a counterexample in the four-task case. Mixed-integer searches instead produced candidate schedules. An adaptive search for uncovered rate vectors produced 92 regions; exact coverage checks and redundancy removal reduced them to 47. Numerical search supplied candidate certificates and is not a premise of the proof.
+
+Fable 5.1 in Claude Code independently reviewed the mathematics, rebuilt the Lean development, replayed its imported closure, reimplemented the rational checks, and examined the prior work. Its findings prompted corrections to scope descriptions and verification controls. The formal verification scope is described in Section~\ref{sec:verification}.
+
+\begin{thebibliography}{9}
+\bibitem{fmo}H. Fujiwara, K. Miyagi, and K. Ouchi. Pinwheel Scheduling with Real Periods. \emph{Discrete Mathematics \& Theoretical Computer Science}, 28:4, 2026. \url{https://doi.org/10.46298/dmtcs.17657}. arXiv:2510.24068v6.
+\bibitem{kawamura}A. Kawamura. Proof of the Density Threshold Conjecture for Pinwheel Scheduling. \emph{PNAS}, 123(32), e2530214123, 2026; preliminary version STOC 2024. \url{https://arxiv.org/abs/2606.27104}.
+\end{thebibliography}
+\end{document}

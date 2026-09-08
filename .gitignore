@@ -1,0 +1,9 @@
+.lake/
+node_modules/
+site/node_modules/
+site/dist/
+*.olean
+*.ilean
+*.ir
+.DS_Store
+results/standalone-build.log
