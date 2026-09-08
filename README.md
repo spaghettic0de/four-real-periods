@@ -6,7 +6,7 @@ Every pinwheel instance with at most four distinct real period values and densit
 
 For four sorted positive real periods with reciprocal sum at most **5/6**, we construct a schedule that meets **every** required frequency window, for all integer starting times.
 
-[Paper (PDF)](paper/four-real-periods.pdf) · [LaTeX](paper/four-real-periods.tex) · [Lean theorem](CertifiedDiscovery/PinwheelPeriods.lean) · [Verification](results/verification-summary.md) · [Video](media/four-real-periods.mp4)
+[Scheduling mechanism](https://spaghettic0de.github.io/four-real-periods/film.html) · [Paper (PDF)](paper/four-real-periods.pdf) · [LaTeX](paper/four-real-periods.tex) · [Lean theorem](CertifiedDiscovery/PinwheelPeriods.lean) · [Verification](results/verification-summary.md) · [Video](media/four-real-periods.mp4)
 
 ![Rate-space illustration and a certified cyclic schedule](media/preview.png)
 
@@ -60,7 +60,7 @@ npm run build
 
 The interactive Three.js illustration shows sampled points in the ordered density-5/6 domain, classified by the certified constructions. The point cloud is explanatory; it is not the proof of coverage. Use the slider to inspect different cyclic certificates. Motion can be paused and respects reduced-motion preferences.
 
-`media/four-real-periods.mp4` is the accompanying silent 18-second video. Source and capture instructions are in `experiments/render_video.py`.
+`media/four-real-periods.mp4` is the accompanying silent 18-second video. The `film.html` view presents each certified word as a timing mechanism: one concentric track per task and one execution pin per slot. You can change schedules, separate the tracks, pause, and adjust speed. This illustrates individual periodic certificates; it does not replace the continuous coverage proof. Source and capture instructions are in `experiments/render_video.py`.
 
 ## AI use and review
 

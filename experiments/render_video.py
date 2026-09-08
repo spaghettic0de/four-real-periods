@@ -1,19 +1,19 @@
 """Start site with npm run dev; pip install playwright; playwright install chromium.
-Usage: python3 experiments/render_video.py http://127.0.0.1:4175
+Usage: python3 experiments/render_video.py http://127.0.0.1:4175/film.html
 Requires ffmpeg on PATH. Frames are rendered at deterministic simulation times.
 """
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 import subprocess,tempfile,sys,json,os
 root=Path(__file__).resolve().parents[1]
-url=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:5173'
+url=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:5173/film.html'
 with sync_playwright() as p, tempfile.TemporaryDirectory(prefix='pinwheel-frames-') as tmp:
     opts={'headless':True,'args':['--enable-unsafe-swiftshader']}
     if os.environ.get('PINWHEEL_CHROME'):opts['executable_path']=os.environ['PINWHEEL_CHROME']
     browser=p.chromium.launch(**opts)
     page=browser.new_page(viewport={'width':1600,'height':900},device_scale_factor=1)
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-    page.goto(url+'/?capture=1',wait_until='networkidle');page.wait_for_function('window.visualReady');page.evaluate('document.fonts.ready')
+    page.goto(url+('\u0026' if '?' in url else '?')+'capture=1',wait_until='networkidle');page.wait_for_function('window.visualReady');page.evaluate('document.fonts.ready')
     for frame in range(432):
         page.evaluate('(t)=>window.renderAt(t)',frame/24)
         page.screenshot(path=f'{tmp}/{frame:04d}.png',animations='disabled')

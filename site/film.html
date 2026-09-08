@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pinwheel — a scheduling mechanism</title><link rel="stylesheet" href="./film.css"></head><body>
+<canvas id="machine" aria-label="Four concentric timing tracks displaying a certified repeating schedule"></canvas>
+<header><span class="rule"></span><h1>Pinwheel</h1><p>FOUR TASKS / ONE SHARED RESOURCE</p></header>
+<aside id="readout"><div class="eyebrow">NOW SERVING</div><div id="active-task">A<span>01 / 12</span></div><div id="legend"></div><p class="note">Each pin is one execution.<br>The arm advances one slot at a time.</p></aside>
+<div id="callout"><span id="mode">TIMING TRACKS</span><p id="explanation">A certified schedule, repeated.</p></div>
+<footer><div class="eyebrow">EXECUTION ORDER <span id="cycle">CYCLE 01</span></div><div id="sequence"></div><div class="caption">47 certified cycles in the proof <span>spaghetti</span></div></footer>
+<nav><button id="play">Pause</button><label>Speed <input id="speed" type="range" min="0.5" max="4" step="0.5" value="2"></label><label>Separate tracks <input id="explode" type="range" min="0" max="1" step="0.01" value="0"></label><label>Schedule <select id="word"></select></label><a href="./">Proof & rate space ↗</a></nav>
+<script type="module" src="./film.js"></script></body></html>
